@@ -238,20 +238,20 @@ OpenSpending.Treemap = function (elem, context, state) {
                 self.context.tooltipMessage(self, node) +
                 '</div><div class="tip-text">';
             var data = node.data;
-            tip.innerHTML = html; 
-          }  
+            tip.innerHTML = html;
+          }
         },
-        //Implement this method for retrieving a requested  
-        //subtree that has as root a node with id = nodeId,  
-        //and level as depth. This method could also make a server-side  
-        //call for the requested subtree. When completed, the onComplete   
-        //callback method should be called.  
-        request: function(nodeId, level, onComplete){  
+        //Implement this method for retrieving a requested
+        //subtree that has as root a node with id = nodeId,
+        //and level as depth. This method could also make a server-side
+        //call for the requested subtree. When completed, the onComplete
+        //callback method should be called.
+        request: function(nodeId, level, onComplete){
           // var tree = eval('(' + json + ')');
-          var tree = json;  
-          var subtree = $jit.json.getSubtree(tree, nodeId);  
-          $jit.json.prune(subtree, 1);  
-          onComplete.onComplete(nodeId, subtree);  
+          var tree = json;
+          var subtree = $jit.json.getSubtree(tree, nodeId);
+          $jit.json.prune(subtree, 1);
+          onComplete.onComplete(nodeId, subtree);
         },
         //Add the name of the node in the corresponding label
         //This method is called once, on label creation and only for DOM labels.
@@ -280,9 +280,8 @@ OpenSpending.Treemap = function (elem, context, state) {
   } else {
     dfd.resolve(self);
   }
-  
+
   return dfd.promise();
 };
 
 })(jQuery);
-

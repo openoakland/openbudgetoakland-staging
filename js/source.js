@@ -16,7 +16,7 @@ var ob = ob || {}
 				query += ' FROM ' + this.table + ' GROUP BY ' + columns.join(',');
 
 				/* encode query */
-				query = encodeURIComponent(query);		
+				query = encodeURIComponent(query);
 
 				/* build url */
 				var url = 'https://www.googleapis.com/fusiontables/v1/';
@@ -28,9 +28,9 @@ var ob = ob || {}
 	}
 })(ob);
 
-/* test 
+/* test
 var x = ob.fusion(
-		'AIzaSyCnWo1USrkSKnN6oy02tNeWfg6aFSg0OI8', 
+		'AIzaSyCnWo1USrkSKnN6oy02tNeWfg6aFSg0OI8',
 		'1V2R7lsdg-GTbGOZ_h_DrGOa-Gfqk1PGA9h_n5zwU'
 		);
 console.log(
@@ -39,7 +39,7 @@ console.log(
 			'Amount'
 		)
 );
-	
+
 x.key = 'xxxxx'
 console.log(
 	x.url(
@@ -48,5 +48,3 @@ console.log(
 		)
 );
 */
-
-

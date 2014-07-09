@@ -88,7 +88,7 @@ ob.display = ob.display || {};
 						.attr("height", function(d) { return y(d.y + d.dy) - y(d.y) });
 				},
 
-				foreign:  function(foreign) { 
+				foreign:  function(foreign) {
 					foreign.attr("x", function(d) { return x(d.x); })
 						.attr("y", function(d) { return y(d.y); })
 						.attr("width", function(d) { return x(d.x + d.dx) - x(d.x); })
@@ -111,7 +111,7 @@ ob.display = ob.display || {};
 					disp.transition(d.parent, -1, false);
 				})
 				.select("text")
-				.text(function(d) { 
+				.text(function(d) {
 					var crumbs = [_root.key];
 					crumbs = crumbs.concat(_path(d));
 					return crumbs.join(' > ');
@@ -138,7 +138,7 @@ ob.display = ob.display || {};
 				.attr("class", "parent")
 				.style("fill", function(d, i) { return _colors(i);})
 				.call(disp.rect)
-				.on("mouseover", function(d, i) { 
+				.on("mouseover", function(d, i) {
 					d3.select(this).style("fill", d3.rgb(_colors(i)).darker());
 					if (_on_handlers["mouseover"]) {
 						_on_handlers["mouseover"](d, i);
@@ -162,7 +162,7 @@ ob.display = ob.display || {};
 				.attr("class","foreignobj")
 				.append("xhtml:div")
 				.attr("class", "textdiv")
-				.on("mouseover", function(d, i) { 
+				.on("mouseover", function(d, i) {
 					d3.select(this.parentNode.parentNode)
 						.select("rect")
 						.style("fill", d3.rgb(_colors(i))
@@ -176,7 +176,7 @@ ob.display = ob.display || {};
 						_on_handlers["mousemove"](d, i);
 					}
 				})
-				.on("mouseout", function(d, i) { 
+				.on("mouseout", function(d, i) {
 					d3.select(this.parentNode.parentNode)
 						.select("rect")
 						.style("fill", _colors(i));
@@ -185,7 +185,7 @@ ob.display = ob.display || {};
 					}
 				});
 
-			fo.html(function(d, i) { 
+			fo.html(function(d, i) {
 				return _rect_text(d, i);
 			});
 
@@ -225,7 +225,7 @@ ob.display = ob.display || {};
 				}
 				/* Fade-in entering text. */
 				disp2.g.selectAll("text").style("fill-opacity", 0);
-				disp2.g.selectAll("foreignObject div").style("display", "none"); 
+				disp2.g.selectAll("foreignObject div").style("display", "none");
 
 				/* Transition to the new view. */
 				disp2.g.selectAll("text")
@@ -235,8 +235,8 @@ ob.display = ob.display || {};
 					.call(disp2.rect)
 					.style("fill-opacity", 0);
 
-				disp2.g.selectAll(".textdiv").style("display", "block"); 
-				disp2.g.selectAll(".foreignobj").call(disp2.foreign); 
+				disp2.g.selectAll(".textdiv").style("display", "block");
+				disp2.g.selectAll(".foreignobj").call(disp2.foreign);
 
 				var t1 = disp.g.transition().duration(750)
 				var t2 = disp2.g.transition().duration(750);
@@ -250,7 +250,7 @@ ob.display = ob.display || {};
 				}
 				else {
 					/* map current display to shrink within bounds */
-					
+
 					disp.x.domain([
 						-1.0 * span2.x / span2.dx,
 						(1.0 - span2.x) / span2.dx
@@ -289,10 +289,10 @@ ob.display = ob.display || {};
 					.style("fill-opacity", 1)
 					.style("stroke-opacity", 1);
 
-				t1.selectAll(".textdiv").style("display", "none"); 
-				t1.selectAll(".foreignobj").call(disp.foreign); 
-				t2.selectAll(".textdiv").style("display", "block"); 
-				t2.selectAll(".foreignobj").call(disp2.foreign); 
+				t1.selectAll(".textdiv").style("display", "none");
+				t1.selectAll(".foreignobj").call(disp.foreign);
+				t2.selectAll(".textdiv").style("display", "block");
+				t2.selectAll(".foreignobj").call(disp2.foreign);
 
 				/* Remove the old node when the transition is finished. */
 				t1.remove().each("end", function() {
@@ -397,7 +397,7 @@ ob.display = ob.display || {};
 					return this;
 				}
 			},
-			
+
 			data: function() {
 				if (arguments.length == 0) {
 					return _data;
@@ -442,7 +442,7 @@ ob.display = ob.display || {};
 					.attr("height", _height)
 					.append("g")
 					.attr(
-						"transform", 
+						"transform",
 						"translate(" + _margin.left + "," + _margin.top + ")")
 					.style("shape-rendering", "crispEdges");
 
@@ -474,4 +474,3 @@ ob.display = ob.display || {};
 		};
 	}
 })(ob.display);
-

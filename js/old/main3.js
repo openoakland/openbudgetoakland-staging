@@ -62,7 +62,7 @@ $(function() {
 	// Add crumb to our crumbs.
 	// The path is computed from the preceeding crumb but we add
 	// the new url parameter for this particular crumb
-	crumbs.push({path:[crumbs[crumbs.length-1].path, 
+	crumbs.push({path:[crumbs[crumbs.length-1].path,
 			   (crumbs.length > 1) ? '&' : '?',
 			   drill, '=', parameters[drill]].join(''),
 		     title:parameters[drill]
@@ -96,14 +96,14 @@ $(function() {
 		// The url parameter is of the form dimension=name
 		var new_location = [window.location.href,
 				    window.location.search ? '&' : '?',
-				    drilldowns[0], '=', 
+				    drilldowns[0], '=',
 				    encodeURIComponent(node.name)];
 		// Go to the new location
 		window.location.href = new_location.join('');
 	    }
 	    // If the node doesn't have children we notify the user
-	    else 
-	    { 
+	    else
+	    {
 		// This can be made more beautiful
 		alert("That's as low as we go.");
 	    }

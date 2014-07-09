@@ -118,26 +118,26 @@ ob.display = ob.display || {};
 				tbody.selectAll("tr").remove();
 				var rows = tbody.selectAll("tr").data(_data);
 				var row = rows.enter().append("tr")
-					.on("click", function(d, i) { 
+					.on("click", function(d, i) {
 						if (_on["click"]) {
 							_on["click"](d,i);
 						}
 					})
-				row.style("visibility", function(d, i) { 
+				row.style("visibility", function(d, i) {
 						return i > _rows ? "hidden" : "visible";
 					})
-					.style("display", function(d, i) { 
+					.style("display", function(d, i) {
 							return i > _rows ? "none" : "table-row";
 					});
 				row.append("td")
 					.append("div")
 					.attr("class", "square")
-					.style("background-color", function(d, i) { 
-						return _colors(i); 
+					.style("background-color", function(d, i) {
+						return _colors(i);
 					})
 				row.append("td")
 					.attr("class", "item")
-					.html(function(d, i) { 
+					.html(function(d, i) {
 							return d.key;
 					})
 					.append("div")

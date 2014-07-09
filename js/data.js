@@ -6,7 +6,7 @@ ob.data = ob.data || {};
 
 		/* helper function for preparing data for visualization */
 		function _prepare_recurse(node) {
-			/* nodes need to have 'children' in order to work with calls to 
+			/* nodes need to have 'children' in order to work with calls to
 			   d3.layout.partition
 			 */
 
@@ -22,10 +22,10 @@ ob.data = ob.data || {};
 			node.values.forEach(function(child) {
 				child.depth = node.depth + 1;
 				child.parent = node;
-				/* 'values' either contains the budget amount for a node, 
+				/* 'values' either contains the budget amount for a node,
 				   or it contains a list of sub nodes.  This code checks
-				   whether 'values' is an array or a number.  If it is a 
-				   number it accumulates it, otherwise it continues to 
+				   whether 'values' is an array or a number.  If it is a
+				   number it accumulates it, otherwise it continues to
 				   process the children
 				 */
 				if (child.hasOwnProperty('values')) {
@@ -85,7 +85,7 @@ ob.data = ob.data || {};
 			/* return this nodes value */
 			return value;
 		}
-		
+
 		/* process the return to d3.nest so that it can be displayed */
 		function _prepare(data) {
 			var root = {
@@ -99,9 +99,9 @@ ob.data = ob.data || {};
 
 		return {
 			crunch: function(rows, order) {
-				/* d3.nest takes the row data given by fusion tables and converts it into 
-				   hierarchical data needed for our visualization.  Accumulate 
-				   and nest data to depth determined by 'heirarchy' 
+				/* d3.nest takes the row data given by fusion tables and converts it into
+				   hierarchical data needed for our visualization.  Accumulate
+				   and nest data to depth determined by 'heirarchy'
 				 */
 				var amount_pos = order.length;
 				var nest = d3.nest();
@@ -112,7 +112,7 @@ ob.data = ob.data || {};
 					});
 
 				/* when rolling up child data into group, sum their values */
-				nest = nest.rollup(function(d) { 
+				nest = nest.rollup(function(d) {
 					var sum = 0.0;
 					d.forEach(function(x) {
 						sum += parseFloat(x[amount_pos]);
@@ -165,4 +165,3 @@ ob.data = ob.data || {};
 		}
 	}
 })(ob.data);
-
