@@ -38,10 +38,10 @@ height: 30px;
 * as in the data crunching portion */
 var fusion = {
   api_key: 'AIzaSyCnWo1USrkSKnN6oy02tNeWfg6aFSg0OI8',
-  table: '1V2R7lsdg-GTbGOZ_h_DrGOa-Gfqk1PGA9h_n5zwU',
-  title: 'Oakland 2014-2015 Adopted Budget',
+  table: '1Jme8E7TZuIBhttz1oovz7UxzrkWahaChHZLXb97Q',
+  title: "Mayor\'s Proposed Policy Budget 2013-2015",
   hierarchy: [
-    'Fund Description',
+    'Fund',
     'Department',
     'Division',
     'Account Category'
@@ -56,9 +56,15 @@ ob.display.budget_treemap()
   .width(1100)
   .height(600)
   .count(40)
+  .palette([
+    "#FF0000",
+    "#00FF00",
+    "#0000FF"
+  ])
   .spreadsheet("#table")
   .treemap("#treemap")
   .url(url)
+  .hierarchy(fusion.hierarchy)
   .create();
   </script></div></body></html></div><div id="wrapper-footer"></div></body><footer id="footer"><div class="container"><div class="row"><div class="col-md-6 col-sm-9"><p> 
 Open Budget: Oakland is an open-source project by <a href="http://openoakland.org">OpenOakland</a> to help citizens better understand Oakland's spending and budget process.</p><ul class="list-inline"><li><a href="http://openoakland.org"><img src="/images/global/openoakland-logo.png"></a></li><li><a href="http://openoakland.org"><img src="/images/global/twitter-icon.png"></a></li><li><a href="http://openoakland.org"><img src="/images/global/github-icon.png"></a></li></ul></div><div class="col-sm-3 col-md-push-3"><ul class="list-unstyled"><li><a href="who-we-are.html">About the Project</a></li><li><a href="http://www.meetup.com/OpenOakland">Get Involved</a></li><li><a href="feedback.html">Give Feedback</a></li></ul></div></div></div><link href="http://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet" type="text/css"></footer></html>
