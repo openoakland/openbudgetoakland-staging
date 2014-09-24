@@ -31,40 +31,68 @@ font-size: small ;
 font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 #spacer {
-height: 30px;
-}</style></head><body><div class="container"><div id="treemap"></div><div id="chart"></div><div id="spacer"></div><div id="table"></div><script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script><script src="/js/palette.js" charset="utf-8"></script><script src="/js/source.js" charset="utf-8"></script><script src="/js/data.js" charset="utf-8"></script><script src="/js/treemap.js" charset="utf-8"></script><script src="/js/spreadsheet.js" charset="utf-8"></script><script src="/js/tooltip.js" charset="utf-8"></script><script src="/js/budget-treemap.js" charset="utf-8"></script><script>/* Budget data is stored in google's fusion tables.  Here we store
-* specific data to acess the api, and table were interested in.
-* The hierarchy is used in the SQL query to the fusion table as well
-* as in the data crunching portion */
-var fusion = {
-  api_key: 'AIzaSyCnWo1USrkSKnN6oy02tNeWfg6aFSg0OI8',
-  table: '1Jme8E7TZuIBhttz1oovz7UxzrkWahaChHZLXb97Q',
-  title: "Mayor\'s Proposed Policy Budget 2013-2015",
-  hierarchy: [
-    'Fund',
-    'Department',
-    'Division',
-    'Account Category'
-  ]
+  height: 30px;
+}
+</style></head><body><div class="container"><div class="row"><div id="dropdown"></div></div><div id="treemap"></div><div id="chart"></div><div id="spacer"></div><div id="table"></div><script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script><script src="/js/palette.js" charset="utf-8"></script><script src="/js/source.js" charset="utf-8"></script><script src="/js/data.js" charset="utf-8"></script><script src="/js/treemap.js" charset="utf-8"></script><script src="/js/spreadsheet.js" charset="utf-8"></script><script src="/js/tooltip.js" charset="utf-8"></script><script src="/js/budget-treemap.js" charset="utf-8"></script><script>var config = {
+  dropdown_values: {
+    "Year": ["FY13-14", "FY14-15"],
+    "Account": ["Revenue", "Expense"]
+  },
+  dropdown_choice: {
+    "Year": "FY14-15",
+    "Account": "Expense"
+  },
+  url: function() {
+    var x = 'http://127.0.0.1:9000/data/' + this.dropdown_choice["Account"] + "." + this.dropdown_choice["Year"] + ".json";
+    return x;
+  }
 };
 
-/* create the url into the fusion table api to load the budget
-* data */
-url = ob.fusion(fusion.api_key, fusion.table).url(fusion.hierarchy, 'Amount');
+function _parse_hash(hash) {
+  var hash_array = hash.split(".");
+  if (hash_array.length) {
+    var x = hash_array.shift();
+    if (config.dropdown_values["Year"].indexOf(x) > -1) {
+      config.dropdown_choice["Year"] = x;
+    }
+  }
+  if (hash_array.length) {
+    var x = hash_array.shift();
+    if (config.dropdown_values["Account"].indexOf(x) > -1) {
+      config.dropdown_choice["Account"] = x;
+    }
+  }
+  return hash_array.join(".");
+}
 
+function _load_hash() {
+  var hash = window.location.hash.replace("#", "");
+  _parse_hash(hash);
+}
+
+_load_hash();
+
+/* get width of container */
+var parent = d3.select(".container");
+var width = parent.node().offsetWidth - parseInt(parent.style("padding-left")) - parseInt(parent.style("padding-right"));
+
+
+/* create display */
 ob.display.budget_treemap()
-  .width(1100)
+  .width(width)
   .height(600)
   .count(40)
-  .palette([
-    "#FF0000",
-    "#00FF00",
-    "#0000FF"
-  ])
+  .config(config)
+  .dropdown("#dropdown")
   .spreadsheet("#table")
   .treemap("#treemap")
-  .url(url)
-  .hierarchy(fusion.hierarchy)
+  .on("set_hash", function(hash) {
+    /* add year and account to hash for linking */
+    var prefix = config.dropdown_choice["Year"] + "." + config.dropdown_choice["Account"];
+    return hash.length ? prefix + "." + hash : prefix;
+  })
+  .on("get_hash", function(hash) { return _parse_hash(hash); })
+  .url(config.url())
   .create();
   </script></div></body></html><div id="wrapper-footer"></div></div><footer id="footer"><div class="container"><div class="row"><div class="col-md-6 col-sm-9"><p> 
 Open Budget: Oakland is an open-source project by <a href="http://openoakland.org">OpenOakland</a> to help citizens better understand Oakland's spending and budget process.</p><ul class="list-inline"><li><a href="http://openoakland.org"><img src="/images/global/openoakland-logo.png"></a></li><li><a href="http://openoakland.org"><img src="/images/global/twitter-icon.png"></a></li><li><a href="http://openoakland.org"><img src="/images/global/github-icon.png"></a></li></ul></div><div class="col-sm-3 col-md-push-3"><ul class="list-unstyled"><li><a href="who-we-are.html">About the Project</a></li><li><a href="http://www.meetup.com/OpenOakland">Get Involved</a></li><li><a href="feedback.html">Give Feedback</a></li></ul></div></div></div></footer><link href="http://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet" type="text/css"></body></html>
