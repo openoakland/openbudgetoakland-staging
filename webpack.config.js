@@ -3,8 +3,7 @@ var path = require('path');
 module.exports = {
   context: path.resolve(__dirname, 'js'),
   entry: {
-    trend: './trend/index.jsx',
-    compare: './compare/index.jsx'
+    compare: './compare/index.jsx',
   },
   output: {
     filename: '[name].bundle.js',
@@ -23,6 +22,10 @@ module.exports = {
           presets: ['es2015'],
           cacheDirectory: true
         }
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       }
     ]
   }
